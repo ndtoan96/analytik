@@ -1,2 +1,4 @@
 dist
 analytik.bat
+*.pyc
+__pycache__
