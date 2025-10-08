@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("analytik")
 
 BATCH_SIZE = 10
+CSV_DIALECT = "excel"
 
 
 async def run():
@@ -31,7 +32,7 @@ async def run():
         line.strip() for line in content.split("\n") if line.strip().startswith("http")
     ]
     with open(output_file_path, "w") as f:
-        writer = csv.writer(f, dialect="unix")
+        writer = csv.writer(f, dialect=CSV_DIALECT)
         writer.writerow(["Link", "View", "Like", "Comment", "Share", "Save"])
     async with TikTokApi() as api:
         await api.create_sessions(num_sessions=1, sleep_after=3, browser="chromium")
@@ -45,7 +46,7 @@ async def run():
                 ]:
                     tasks.append((url, tg.create_task(api.video(url=url).info())))
             with open(output_file_path, "a") as f:
-                writer = csv.writer(f, dialect="unix")
+                writer = csv.writer(f, dialect=CSV_DIALECT)
                 for url, task in tasks:
                     stats = task.result().get("stats")
                     like_count = stats.get("diggCount")
