@@ -5,7 +5,7 @@ if %ERRORLEVEL% neq 0 (
     powershell -ExecutionPolicy Bypass -c "irm https://github.com/astral-sh/uv/releases/download/0.8.24/uv-installer.ps1 | iex"
 )
 
-%USERPROFILE%\.local\bin\uv.exe tool install https://github.com/ndtoan96/analytik/releases/download/v0.2.0/analytik-0.2.0-py3-none-any.whl
+%USERPROFILE%\.local\bin\uv.exe tool install https://github.com/ndtoan96/analytik/releases/download/v0.3.0/analytik-0.3.0-py3-none-any.whl
 if %ERRORLEVEL% neq 0 (
     echo Failed to install analytik. Exiting.
     pause
